@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css27family-Encode+Sans+Expanded:wght@300&display=swap");
+:root {
+  --main-color: rgb(170, 57, 164);
+  --light-color: #f0f3f2;
+  --shadow: rgba(145, 158, 171, 0.2) 0px 2px 4px -1px rgba(145, 158, 171, 0.14) 0px
+    4px 5px -1px;
+  --font-fmily: "Encode Sans Expanded", sans-serif;
+  --rating-color: #ffc908;
+}
+
+body {
+  font-family: var(--font-fmily) !important;
+  background-color: #e8e1da;
+}
+
+.rating-color {
+  color: var(--rating-color);
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+a,
+a.hover {
+  color: black;
+  text-decoration: none !important;
+}
+.product:hover {
+  box-shadow: var(--shadow);
+  border: solid 2px var(--main-color);
+}
+.product .btn {
+  transition: transform 1s, opacity 1s;
+  transform: translateY(100%);
+  opacity: 0;
+}
+.product:hover .btn {
+  transform: translateY(0%);
+  opacity: 1;
+}
+.font-sm {
+  font-size: 14px;
+}
+.text-main {
+  color: var(--main-color);
+}
+.bg-main {
+  background-color: var(--main-color) !important;
+}
+.bg-main-light {
+  background-color: var(--light-color);
+}
+.image-product-size {
+  width: 100%;
+  height: 200px;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    clip-path: inset(100% 100% 0 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.scrollAnimated {
+  animation: appear linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 40%;
+}
+
+@media screen and(miWidth) {
+}
+
+:hover.scrollAnimated {
+  transform: scale(1.01);
+
+  transition: linear 0.2s;
+}
+input {
+  background-color: #f0f0f0; /* Replace with your desired color */
+  /* Other styles you want to apply */
+}
