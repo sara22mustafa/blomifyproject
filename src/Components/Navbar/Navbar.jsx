@@ -16,7 +16,7 @@ function Navbar() {
     navigate("./login");
   }
 
-  const occasions = ["All bouquets", "Bridal Bouquet", "Mother's Day", "birthday", "Valentine's Day", "graduation", "anniversary", "get well soon"]
+  const occasions = ["All bouquets", "Bridal Bouquet", "Mother's Day", "birthday", "Valentine's Day", "Graduation Day", "Anniversary", "Get well soon"]
 
   const dropdownRef = useRef(null);
 
