@@ -93,7 +93,7 @@ export default function ProductDetails() {
     <div className="container mx-auto px-4 py-8 ">
       <div className="flex flex-col md:flex-row">
         {/* Image Slider */}
-        <div className="w-full md:w-1/2 lg:w-1/3 mb-4 md:mb-0 bg-deep-burgundy">
+        <div className="w-full h-full md:w-1/2 lg:w-1/3 mb-4 md:mb-0">
           <div
             id="controls-carousel"
             className="relative w-full"
