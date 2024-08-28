@@ -4,6 +4,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../Assets/images/logo.png";
 import { UserContext } from "../../Context/UserContext";
 import Image from "../../Assets/images/profile.jpg";
+import { useSelector } from "react-redux";
 
 
 function Navbar() {
@@ -20,6 +21,8 @@ function Navbar() {
 
   const dropdownRef = useRef(null);
 
+
+  const cartItems = useSelector((state) => state.cart);
 
 
   const closeDropdown = () => {
@@ -125,7 +128,7 @@ function Navbar() {
                   <div tabIndex={0} role="button" className="btn btn-ghost rounded-btn font-medium text-base">
                     Occasions
                     <svg class="w-2.5 h-2.5 mt-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
                     </svg>
                   </div>
                   {isOpen && (
@@ -202,7 +205,7 @@ function Navbar() {
                   htmlFor="cart"
                   className="t-0 absolute left-0 mb-4 ms-4 rounded-full bg-red-600 px-[0.35em] py-[0.15em] text-[0.6rem] font-bold leading-none text-light-beige"
                 >
-                  2
+                  {cartItems.length}
                 </span>
               </Link>
 

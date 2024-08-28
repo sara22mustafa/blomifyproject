@@ -16,6 +16,8 @@ import Contactus from "./Components/Contactus/Contactus.jsx";
 import Product from "./Components/Product/Product.jsx";
 import ProductDetails from "./Components/ProductDetails/ProductDetails.jsx";
 import { useContext, useEffect } from "react";
+import toast, {Toaster} from "react-hot-toast";
+
 
 let router = createBrowserRouter([
   {
@@ -94,7 +96,9 @@ export default function App() {
     <UserContxtProvider>
       <CounterContextProvider>
         <RouterProvider router={router}></RouterProvider>
+        <Toaster/>
       </CounterContextProvider>
+      
     </UserContxtProvider>
   );
 }

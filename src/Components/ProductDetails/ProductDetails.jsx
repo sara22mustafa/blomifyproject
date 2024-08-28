@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import StarRatings from "react-star-ratings";
 import { db } from "../../firebase/firebase";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs , setDoc} from "firebase/firestore";
 import { Vortex } from "react-loader-spinner";
 import Image from '../../Assets/images/profile.jpg'
 import {Helmet} from "react-helmet";
-
-
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../redux/cartSlice";
+import toast from "react-hot-toast";
+import { getAuth } from "firebase/auth";
+import { setCartItems } from "../../redux/cartSlice";
 
 export default function ProductDetails() {
  
@@ -22,13 +25,14 @@ export default function ProductDetails() {
     SetLoading(true);
     try {
       const productDoc = await getDoc(doc(db, 'products', id));
-
+      setProduct({...productDoc.data(), id : productDoc.id})
+      console.log({...productDoc.data(), id : productDoc.id})
       const reviewsCollectionRef = collection(doc(db, 'products', id), 'reviews');
       const reviewsSnapshot = await getDocs(reviewsCollectionRef);
       const reviewsData = reviewsSnapshot.docs.map(doc => doc.data());
       setReviews(reviewsData);
       if (productDoc.exists()) {
-        setProduct(productDoc.data());
+        setProduct(productDoc.data(),productDoc.id);
       } else {
         console.error("No such document!");
       }
@@ -38,15 +42,115 @@ export default function ProductDetails() {
       SetLoading(false);
     }
   };
+  console.log(id)
+
+  const cartItems = useSelector((state) => state.cart);
+    const dispatch = useDispatch();
+
+    const addCart = (item , id) => {
+        // console.log(item)
+        dispatch(addToCart(item ,id));
+        toast.success("Add to cart")
+    }
+    // console.log(cartItems)
+
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+    }, [cartItems])
+
+    const auth = getAuth();
+  const user = auth.currentUser;
+  const userId = user ? user.uid : null;
 
   useEffect(() => {
-    getProductData();
-  }, []);
+    if (userId) {
+        const saveCartToFirebase = async () => {
+            try {
+                const cartRef = doc(db, "carts", userId);
+                await setDoc(cartRef, { items: cartItems });
+                console.log("Cart saved to Firebase");
+            } catch (error) {
+                console.error("Error saving cart to Firebase:", error);
+            }
+        };
 
-  //Avarage calculate
-  let totalRating = reviews.reduce((acc, comment) => acc + comment.rating, 0);
-  let averageRating = totalRating / reviews.length;
-  product.rating =averageRating;
+        saveCartToFirebase();
+    }
+}, [cartItems, userId]);
+
+useEffect(() => {
+    if (userId) {
+        const loadCartFromFirebase = async () => {
+            try {
+                const cartRef = doc(db, "carts", userId);
+                const cartDoc = await getDoc(cartRef);
+                if (cartDoc.exists()) {
+                    const cartData = cartDoc.data();
+                    dispatch(setCartItems(cartData.items || []));
+                    console.log("Cart loaded from Firebase");
+                } else {
+                    console.log("No cart found in Firebase");
+                }
+            } catch (error) {
+                console.error("Error loading cart from Firebase:", error);
+            }
+        };
+
+        loadCartFromFirebase();
+    }
+}, [dispatch, userId]);
+
+
+useEffect(() => {
+  localStorage.setItem('cart', JSON.stringify(cartItems));
+}, [cartItems]);
+
+
+  useEffect(() => {
+    getProductData(product.id);
+  }, [id]);
+
+  // //Avarage calculate
+  // let totalRating = reviews.reduce((acc, comment) => acc + comment.rating, 0);
+  // let averageRating = totalRating / reviews.length;
+  // product.rating =averageRating;
+
+// useEffect(() => {
+//   const getProductData = async () => {
+//     SetLoading(true);
+//     try {
+//       const productDoc = await getDoc(doc(db, 'products', id));
+//       const reviewsCollectionRef = collection(doc(db, 'products', id), 'reviews');
+//       const reviewsSnapshot = await getDocs(reviewsCollectionRef);
+//       const reviewsData = reviewsSnapshot.docs.map(doc => doc.data());
+//       setReviews(reviewsData);
+
+//       if (productDoc.exists()) {
+//         const productData = productDoc.data();
+        
+//         // Calculate average rating
+//         let totalRating = reviewsData.reduce((acc, comment) => acc + comment.rating, 0);
+//         let averageRating = totalRating / reviewsData.length;
+
+//         // Set product with rating
+//         setProduct({ ...productData, rating: averageRating });
+//       } else {
+//         console.error("No such document!");
+//       }
+//     } catch (error) {
+//       console.error("Error getting document:", error);
+//     } finally {
+//       SetLoading(false);
+//     }
+//   };
+
+//   getProductData();
+// }, [id]);
+
+
+
+
+  
 
 
 
@@ -184,10 +288,12 @@ export default function ProductDetails() {
             <li>Name :<b>{product.type}</b></li>
             <li>Country :<b>{product.country}</b></li>
             <li>Color :<b>{product.colour}</b></li>
+            <li>id :<b>{id}</b></li>
           </ul>
 
           <h4 className="text-lg font-semibold text-yellow-600 mb-4">{product.price} EGP</h4>
-          <button className="bg-deep-burgundy text-white rounded-full py-2 px-4 mt-4 hover:bg-dusty-mauve transition">
+          <button  onClick={() => addCart(product ,id)}
+            className="bg-deep-burgundy text-white rounded-full py-2 px-4 mt-4 hover:bg-dusty-mauve transition">
             Add to cart
           </button>
         </div>
