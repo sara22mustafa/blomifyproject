@@ -111,9 +111,9 @@ useEffect(() => {
   }, [id]);
 
   // //Avarage calculate
-  // let totalRating = reviews.reduce((acc, comment) => acc + comment.rating, 0);
-  // let averageRating = totalRating / reviews.length;
-  // product.rating =averageRating;
+  let totalRating = reviews.reduce((acc, comment) => acc + comment.rating, 0);
+  let averageRating = totalRating / reviews.length;
+  product.rating =averageRating;
 
 // useEffect(() => {
 //   const getProductData = async () => {
