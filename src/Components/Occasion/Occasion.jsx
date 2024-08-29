@@ -4,6 +4,6 @@ import Style from './Occasion.module.css'
 
 export default function Occasion() {
   return <>
-    <h1>Occasion</h1>
+    <h2>Occasions</h2>
   </>
 }
