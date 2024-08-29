@@ -153,37 +153,9 @@ useEffect(() => {
             
             <div className="flex flex-wrap items-cente justify-center ">
   
-            
+          
   
-  
-             <div className=" h-screen w-screen items-cente justify-center p-14"> 
-             
-             <div className="flex items-cente ">
-             <img src={`${slides[currentIndex]}`} className="w-2/6 h-80" alt=" "/>
-             <img src={`${slides[nextImg]}`} className="w-2/6 h-80" alt=" "/>
-             <img src={`${slides[nextImg2]}`} className="w-2/6 h-80" alt=" "/>
-             </div>
-  
-             <p className="w-11/12 text-dusty-mauve text-xl mt-8 space-x-1"> 
-                  
-                  Bloomify is a chic floral boutique that curates exquisite bouquets tailored to every sentiment and celebration. 
-                  Known for its attention to detail and innovative designs, Bloomify transforms fresh, hand-picked flowers into unique arrangements that captivate and inspire. Whether you're planning a wedding, marking a milestone, or simply wishing to surprise a loved one.
-                 
-                    </p>
-  
-             <div>
-              
-             </div>
-  {/* 
-             <p className=" text-dusty-mauve text-xl mt-2"> 
-                   Bloomify’s creations are both a visual delight and a heartfelt expression. The store's commitment to quality and artistry ensures that each bouquet is not just a gift, but a memorable experience, making Bloomify the go-to choice for discerning flower lovers.
-                
-                    </p> */}
-             
-             </div>
-  
-  
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-8 mt-1 mx-16 pt-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-8 mt-12 mx-16 pt-2">
                
   
                 {products.map((product, index) => (
