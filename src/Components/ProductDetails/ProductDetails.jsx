@@ -360,6 +360,8 @@ import { addToCart } from "../../redux/cartSlice";
 import toast from "react-hot-toast";
 import { getAuth } from "firebase/auth";
 import { setCartItems } from "../../redux/cartSlice";
+import ScrollToTop from "../ScrollToTop/ScrollToTop";
+
 
 export default function ProductDetails() {
   const [product, setProduct] = useState({});
@@ -444,6 +446,7 @@ export default function ProductDetails() {
 
   return (
     <>
+    <ScrollToTop>
       {loading ? (
         <div className="flex justify-center items-center h-lvh">
           <Vortex
@@ -540,6 +543,7 @@ export default function ProductDetails() {
           </Helmet>
         </>
       )}
+      </ScrollToTop>
     </>
   );
 }
