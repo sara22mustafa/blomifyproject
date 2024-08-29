@@ -23,7 +23,7 @@ const Footer = () => {
             {/* Social media icons container */}
             <div className="mb-6 flex justify-center space-x-2">
               <a
-                href="#!"
+                href="https://www.facebook.com/profile.php?id=61564176270981&mibextid=ZbWKwL"
                 type="button"
                 className="rounded-full bg-white p-3 uppercase leading-normal text-surface shadow-dark-3 shadow-black/30 transition duration-150 ease-in-out hover:shadow-dark-1 focus:shadow-dark-1 focus:outline-none focus:ring-0 active:shadow-1 dark:bg-neutral-700 dark:text-white"
                 data-twe-ripple-init=""
@@ -40,44 +40,10 @@ const Footer = () => {
                   </svg>
                 </span>
               </a>
+              
+              
               <a
-                href="#!"
-                type="button"
-                className="rounded-full bg-white p-3 uppercase leading-normal text-surface shadow-dark-3 shadow-black/30 transition duration-150 ease-in-out hover:shadow-dark-1 focus:shadow-dark-1 focus:outline-none focus:ring-0 active:shadow-1 dark:bg-neutral-700 dark:text-white"
-                data-twe-ripple-init=""
-                data-twe-ripple-color="light"
-              >
-                <span className="mx-auto [&>svg]:h-5 [&>svg]:w-5">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 512 512"
-                  >
-                    {/*!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. */}
-                    <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
-                  </svg>
-                </span>
-              </a>
-              <a
-                href="#!"
-                type="button"
-                className="rounded-full bg-white p-3 uppercase leading-normal text-surface shadow-dark-3 shadow-black/30 transition duration-150 ease-in-out hover:shadow-dark-1 focus:shadow-dark-1 focus:outline-none focus:ring-0 active:shadow-1 dark:bg-neutral-700 dark:text-white"
-                data-twe-ripple-init=""
-                data-twe-ripple-color="light"
-              >
-                <span className="mx-auto [&>svg]:h-5 [&>svg]:w-5">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 488 512"
-                  >
-                    {/*!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. */}
-                    <path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
-                  </svg>
-                </span>
-              </a>
-              <a
-                href="#!"
+                href="https://www.instagram.com/blo_omifyshop?igsh=anI3MW81cWpjNDd4"
                 type="button"
                 className="rounded-full bg-white p-3 uppercase leading-normal text-surface shadow-dark-3 shadow-black/30 transition duration-150 ease-in-out hover:shadow-dark-1 focus:shadow-dark-1 focus:outline-none focus:ring-0 active:shadow-1 dark:bg-neutral-700 dark:text-white"
                 data-twe-ripple-init=""
@@ -99,35 +65,19 @@ const Footer = () => {
             {/* Copyright information */}
             <div className="mb-6">
               <p>
-                Here are the biggest enterprise technology acquisitions of 2024
-                so far, in reverse chronological order.
+              your local flower shop where every bouquet is crafted with love
+              and care to brighten your day and add a touch of nature's beauty
+              to your life
               </p>
             </div>
             {/* Links section */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-4">
-              <div className="mb-6">
-                <h5 className="mb-2.5 font-bold uppercase">Links</h5>
-                <ul className="mb-0 list-none"></ul>
-              </div>
-              <div className="mb-6">
-                <h5 className="mb-2.5 font-bold uppercase">Links</h5>
-                <ul className="mb-0 list-none"></ul>
-              </div>
-              <div className="mb-6">
-                <h5 className="mb-2.5 font-bold uppercase">Links</h5>
-                <ul className="mb-0 list-none"></ul>
-              </div>
-              <div className="mb-6">
-                <h5 className="mb-2.5 font-bold uppercase">Links</h5>
-                <ul className="mb-0 list-none"></ul>
-              </div>
-            </div>
+            
           </div>
           {/* Copyright section */}
           <div className="w-full bg-black/5 p-4 text-center">
             © 2024 Copyright:
-            <a className="font-semibold" href="https://tw-elements.com/">
-              Blomify
+            <a className="font-semibold">
+              Bloomify
             </a>
           </div>
         </footer>
