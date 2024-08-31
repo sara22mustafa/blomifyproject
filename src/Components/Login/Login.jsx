@@ -167,7 +167,7 @@ export default function Login() {
 
               <div className="!mt-8">
                 {isLoading ? (
-                  <div class="grid justify-items-stretch ">
+                  <div className="grid justify-items-stretch ">
                     <button
                       type="button"
                       className="w-1/3 justify-self-center flex items-center justify-center shadow-xl py-3 px-4 text-sm tracking-wide rounded-tr-full rounded-bl-full bg-deep-burgundy text-white hover:bg-dusty-mauve focus:outline-none"
@@ -176,7 +176,7 @@ export default function Login() {
                     </button>
                   </div>
                 ) : (
-                  <div class="grid justify-items-stretch ">
+                  <div className="grid justify-items-stretch ">
                     <button
                       type="submit"
                       className="w-1/3 justify-self-center shadow-xl py-3 px-4 text-sm tracking-wide rounded-tr-full rounded-bl-full bg-deep-burgundy text-white hover:bg-dusty-mauve focus:outline-none"

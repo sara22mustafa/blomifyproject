@@ -1,10 +1,11 @@
 import { Collapse, Dropdown, initTWE } from "tw-elements";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link,  useNavigate } from "react-router-dom";
 import logo from "../../Assets/images/logo.png";
 import { UserContext } from "../../Context/UserContext";
 import Image from "../../Assets/images/profile.jpg";
 import { useSelector } from "react-redux";
+
 
 function Navbar() {
   let { userToken, setUserToken } = useContext(UserContext);
