@@ -1,10 +1,11 @@
 import { Collapse, Dropdown, initTWE } from "tw-elements";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link,  useNavigate } from "react-router-dom";
 import logo from "../../Assets/images/logo.png";
 import { UserContext } from "../../Context/UserContext";
 import Image from "../../Assets/images/profile.jpg";
 import { useSelector } from "react-redux";
+import SearchBar from "../SearchBar/SearchBar";
 
 
 function Navbar() {
@@ -127,7 +128,7 @@ function Navbar() {
                 >
                   <div tabIndex={0} role="button" className="btn btn-ghost rounded-btn font-medium text-base">
                     Occasions
-                    <svg class="w-2.5 h-2.5 mt-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <svg className="w-2.5 h-2.5 mt-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                       <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
                     </svg>
                   </div>

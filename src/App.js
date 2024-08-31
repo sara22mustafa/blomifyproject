@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider ,  Routes, Route } from "react-router-dom";
 import Layout from "./Components/Layout/Layout.jsx";
 import Home from "./Components/Home/Home.jsx";
 // import Product from "./Components/Products/Products.jsx";
@@ -17,6 +17,7 @@ import Product from "./Components/Product/Product.jsx";
 import ProductDetails from "./Components/ProductDetails/ProductDetails.jsx";
 import { useContext, useEffect } from "react";
 import toast, {Toaster} from "react-hot-toast";
+
 
 
 let router = createBrowserRouter([

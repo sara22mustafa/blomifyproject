@@ -150,7 +150,6 @@ export default function ProductDetails() {
                   <li>Name :<b>{product.type}</b></li>
                   <li>Country :<b>{product.country}</b></li>
                   <li>Color :<b>{product.colour}</b></li>
-                  <li>id :<b>{product.id}</b></li>
                 </ul>
                 <h4 className="text-lg font-semibold text-yellow-600 mb-4">{product.price} EGP</h4>
                 <button

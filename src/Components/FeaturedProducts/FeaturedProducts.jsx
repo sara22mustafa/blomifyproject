@@ -54,7 +54,7 @@ export default function Occasion() {
   // console.log(products)
 
   // function ToDetails(id) {
-  //   navigate(`/productsDetails/${id}`);
+    // navigate(`/productsDetails/${id}`);
   // }
 
   useEffect(() => {
