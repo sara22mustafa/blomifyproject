@@ -41,16 +41,18 @@ export default function Occasion() {
       }));
       SetLoading(false);
       setProducts(dataQuery);
-      setData(dataQuery.slice(0,36))
+      message==="All bouquets"||message==="Not Available"?
+      setData(dataQuery.slice(0,36)): setData(products)
     };
     fetchData();
-  }, []);
+  }, [message]);
 
-  console.log(products)
+  // console.log(products.length)
 
 
   function ToDetails(id) {
     navigate(`/productsDetails/${id}`);
+    
   }
 
   useEffect(() => {
@@ -59,6 +61,7 @@ export default function Occasion() {
   
   function moreData(){
     setData(data.concat(products.slice(data.length,data.length+20)))
+    console.log(data.length)
   }
 
   return (
