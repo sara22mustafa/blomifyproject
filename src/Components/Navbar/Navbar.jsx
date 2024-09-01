@@ -1,24 +1,32 @@
 import { Collapse, Dropdown, initTWE } from "tw-elements";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Link,  useNavigate } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import logo from "../../Assets/images/logo.png";
 import { UserContext } from "../../Context/UserContext";
 import Image from "../../Assets/images/profile.jpg";
 import { useSelector } from "react-redux";
-
+import Search  from "../Search/Search";
 
 function Navbar() {
-  let { userToken, setUserToken } = useContext(UserContext);
+// Log out part and logedin user data --------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  let { userToken, userId ,adminId,setUserToken,setUserId } = useContext(UserContext);
   let navigate = useNavigate();
 
   function logOut() {
     localStorage.removeItem("userToken");
+    localStorage.removeItem("userId");
     setUserToken(null);
+    setUserId(null)
     navigate("./login");
   }
   // useEffect(() => {
   //   logOut();
   // }, []);
+
+// End of Logout part--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// Ocassion Menu DropDown code---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   const occasions = [
     "All bouquets",
@@ -32,7 +40,6 @@ function Navbar() {
   ];
 
   const dropdownRef = useRef(null);
-
   const cartItems = useSelector((state) => state.cart);
 
   const closeDropdown = () => {
@@ -46,23 +53,25 @@ function Navbar() {
         closeDropdown();
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
   // Initialize tw-elements
   initTWE({ Collapse, Dropdown });
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
   // Initialize tw-elements
   initTWE({ Collapse, Dropdown });
+
+// End of ocassion part ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
   return (
     <nav className="relative flex w-full items-center justify-between opacity-9 bg-dusty-mauve py-2 shadow-dark-mild dark:bg-deep-burgundy ">
       <div className="flex w-full flex-wrap items-center justify-between px-3">
@@ -110,10 +119,10 @@ function Navbar() {
               loading="lazy"
             />
           </Link>
+          <Search />
           {/* Left navigation links */}
-          {/* {userToken !== null && ( */}
-          <ul
-            className="list-style-none me-auto  items-center flex flex-col ps-0 lg:flex-row"
+          {/* Check if the lging in person is the admin or not */}
+          {userId === adminId && userToken !== null ? <ul className="list-style-none me-auto  items-center flex flex-col ps-0 lg:flex-row"
             data-twe-navbar-nav-ref
           >
             <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
@@ -207,8 +216,111 @@ function Navbar() {
                 Contact Us
               </Link>
             </li>
-          </ul>
-          {/* // )} */}
+            <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
+                <Link
+                  className="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
+                  to="/dashboard"
+                  data-twe-nav-link-ref
+                >
+                  Dashboard
+                </Link>
+            </li>
+          </ul> : <ul className="list-style-none me-auto  items-center flex flex-col ps-0 lg:flex-row"
+            data-twe-navbar-nav-ref
+          >
+            <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
+              {/* Home link */}
+              <Link
+                className="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
+                to="/"
+                data-twe-nav-link-ref
+              >
+                Home
+              </Link>
+            </li>
+            {/* Shop link */}
+            <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
+              <Link
+                className="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
+                to="/products"
+                data-twe-nav-link-ref
+              >
+                Shop
+              </Link>
+            </li>
+            {/* ocassion link */}
+            <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
+              <div
+                ref={dropdownRef}
+                className={`dropdown  ${
+                  isOpen ? "dropdown-open dropdown-end" : "dropdown-end"
+                } text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 `}
+                onClick={toggleDropdown}
+              >
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost rounded-btn font-medium text-base"
+                >
+                  Occasions
+                  <svg
+                    class="w-2.5 h-2.5 mt-1"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 10 6"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="m1 1 4 4 4-4"
+                    />
+                  </svg>
+                </div>
+                {isOpen && (
+                  <ul
+                    tabIndex={0}
+                    className="menu dropdown-content bg-pale-grayish w-36 rounded-box z-[1] mt-4 ml-8 p-1 shadow"
+                  >
+                    {occasions.map((item, index) => (
+                      <li key={index}>
+                        <Link
+                          to="./products"
+                          state={{ message: item }}
+                          onClick={closeDropdown} // Close dropdown on item click
+                        >
+                          {item}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </li>
+            {/* About us link */}
+            <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
+              <Link
+                className="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
+                to="/about"
+                data-twe-nav-link-ref
+              >
+                About Us
+              </Link>
+            </li>
+            {/* Contact us link */}
+            <li className="mb-4 lg:mb-0 lg:pe-2" data-twe-nav-item-ref>
+              <Link
+                className="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
+                to="/contactus"
+                data-twe-nav-link-ref
+              >
+                Contact Us
+              </Link>
+            </li> 
+            </ul>
+            }
         </div>
 
         {/* Right elements */}

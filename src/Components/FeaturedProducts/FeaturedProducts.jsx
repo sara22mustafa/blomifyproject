@@ -18,6 +18,7 @@ import toast from "react-hot-toast";
 import { getAuth } from "firebase/auth";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import { setCartItems } from "../../redux/cartSlice";
+import Filter from "../Filter/Filter";
 
 export default function Occasion() {
   const location = useLocation();
@@ -33,9 +34,11 @@ export default function Occasion() {
   ]
 
   const [products, setProducts] = useState([]);
+  const [filteredProduct, setFilteredProduct] = useState([]);
   const [loading, SetLoading] = useState(false);
   const navigate = useNavigate();
  
+// get all data from firebase part--------------------------------------------------------------------------------------------------------------------------------------------
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,16 +49,13 @@ export default function Occasion() {
         ...element.data()
       }));
       SetLoading(false);
-      setProducts(dataQuery);
+      setProducts(dataQuery)
+      setFilteredProduct(dataQuery);
     };
     fetchData();
   }, []);
 
-  // console.log(products)
-
-  // function ToDetails(id) {
-    // navigate(`/productsDetails/${id}`);
-  // }
+// End get all data part--------------------------------------------------------------------------------------------------------------------------------------------
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -66,6 +66,7 @@ export default function Occasion() {
     return () => clearInterval(timer); // Cleanup interval on component unmount
   }, []);
 
+// Cart part on shop page-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   const cartItems = useSelector((state)=> state.cart);
   // console.log(cartItems);
@@ -96,34 +97,43 @@ export default function Occasion() {
 
         saveCartToFirebase();
     }
-}, [cartItems, userId]);
+  }, [cartItems, userId]);
 
-useEffect(() => {
-    if (userId) {
-        const loadCartFromFirebase = async () => {
-            try {
-                const cartRef = doc(db, "carts", userId);
-                const cartDoc = await getDoc(cartRef);
-                if (cartDoc.exists()) {
-                    const cartData = cartDoc.data();
-                    dispatch(setCartItems(cartData.items || []));
-                    console.log("Cart loaded from Firebase");
-                } else {
-                    console.log("No cart found in Firebase");
-                }
-            } catch (error) {
-                console.error("Error loading cart from Firebase:", error);
-            }
-        };
+  useEffect(() => {
+      if (userId) {
+          const loadCartFromFirebase = async () => {
+              try {
+                  const cartRef = doc(db, "carts", userId);
+                  const cartDoc = await getDoc(cartRef);
+                  if (cartDoc.exists()) {
+                      const cartData = cartDoc.data();
+                      dispatch(setCartItems(cartData.items || []));
+                      console.log("Cart loaded from Firebase");
+                  } else {
+                      console.log("No cart found in Firebase");
+                  }
+              } catch (error) {
+                  console.error("Error loading cart from Firebase:", error);
+              }
+          };
 
-        loadCartFromFirebase();
-    }
-}, [dispatch, userId]);
+          loadCartFromFirebase();
+      }
+  }, [dispatch, userId]);
 
 
-useEffect(() => {
-  localStorage.setItem('cart', JSON.stringify(cartItems));
-}, [cartItems]);
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+  }, [cartItems]);
+
+// End Cart-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// Filteration part on products --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  const handleFilterarton = (filteredData) => {
+    setFilteredProduct(filteredData); 
+  };
+// End Filteration part --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
     return (
       <>
@@ -149,16 +159,10 @@ useEffect(() => {
           </div>
         ) : (
           <>
-  
-            
+            <Filter data={products} filteration={handleFilterarton} />        
             <div className="flex flex-wrap items-cente justify-center ">
-  
-          
-  
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-8 mt-12 mx-16 pt-2">
-               
-  
-                {products.map((product, index) => (
+                {filteredProduct.map((product, index) => (
                   product.category===message||message==="All bouquets"||message==="Not Available"?
                   <div
                     style={{ backgroundColor: "#F3C0C7" }}

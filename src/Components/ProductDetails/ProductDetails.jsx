@@ -20,28 +20,30 @@ export default function ProductDetails() {
   const [reviews, setReviews] = useState([]);
 
   const { id } = useParams();
+  useEffect(() => {
+    const getProductData = async () => {
+      setLoading(true);
+      try {
+        const productTemp = await getDoc(doc(db, "products", id));
+        const productData = { ...productTemp.data(), id: productTemp.id };
 
-  const getProductData = async () => {
-    setLoading(true);
-    try {
-      const productTemp = await getDoc(doc(db, "products", id));
-      const productData = { ...productTemp.data(), id: productTemp.id };
+        const reviewsCollectionRef = collection(doc(db, 'products', id), 'reviews');
+        const reviewsSnapshot = await getDocs(reviewsCollectionRef);
+        const reviewsData = reviewsSnapshot.docs.map(doc => doc.data());
 
-      const reviewsCollectionRef = collection(doc(db, 'products', id), 'reviews');
-      const reviewsSnapshot = await getDocs(reviewsCollectionRef);
-      const reviewsData = reviewsSnapshot.docs.map(doc => doc.data());
+        const totalRating = reviewsData.reduce((acc, comment) => acc + comment.rating, 0);
+        const averageRating = reviewsData.length > 0 ? totalRating / reviewsData.length : 0;
 
-      const totalRating = reviewsData.reduce((acc, comment) => acc + comment.rating, 0);
-      const averageRating = reviewsData.length > 0 ? totalRating / reviewsData.length : 0;
-
-      setProduct({ ...productData, rating: averageRating });
-      setReviews(reviewsData);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  }
+        setProduct({ ...productData, rating: averageRating });
+        setReviews(reviewsData);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getProductData()
+  }, [id]);
 
   const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -91,9 +93,9 @@ export default function ProductDetails() {
     }
   }, [dispatch, userId]);
 
-  useEffect(() => {
-    getProductData();
-  }, []);
+  // useEffect(() => {
+  //   getProductData();
+  // }, []);
 
   return (
     <>

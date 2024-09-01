@@ -12,7 +12,10 @@ import {Helmet} from "react-helmet";
 
 
 export default function Login() {
-  let { setUserToken } = useContext(UserContext);
+
+// Login userData part -----------------------------------------------------------------------------------------------------------------------------
+ 
+  let { setUserToken, setUserId ,adminId}  = useContext(UserContext);
   let navigate = useNavigate();
 
   const [error, setError] = useState(null);
@@ -38,10 +41,17 @@ export default function Login() {
       console.log("User logged in:", user);
 
       // Store token and navigate (adjust as needed for your use case)
-      const token = await user.getIdToken(); // Get the token
+      const token = await user.getIdToken();
+      const thisId = await user.uid; 
       localStorage.setItem("userToken", token);
+      localStorage.setItem("userId", thisId);
       setUserToken(token);
-      navigate("/");
+      setUserId(thisId)
+      if(user.uid === adminId){
+        navigate("/dashboard")
+      }else{
+        navigate("/");
+      }
     } catch (error) {
       setError(error.message); // Display Firebase error message
       console.error("Error logging in user:", error.message);
@@ -50,6 +60,10 @@ export default function Login() {
     }
   }
 
+// End of login userData part ----------------------------------------------------------------------------------------------------------------------------
+
+// using yup & formik part to validate login data and forms ----------------------------------------------------------------------------------------------------------------------
+  
   let validationSchema = Yup.object({
     email: Yup.string().email("Email is invalid").required("Email is required"),
     password: Yup.string()
@@ -68,6 +82,9 @@ export default function Login() {
     validationSchema,
     onSubmit: loginSubmit,
   });
+
+// End part of formik and yup--------------------------------------------------------------------------------------------------------------------------------------
+
 
   return (
     <>

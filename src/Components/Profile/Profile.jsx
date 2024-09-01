@@ -5,12 +5,14 @@ import { useNavigate } from "react-router-dom";
 const Profile = () => {
   const userdata = localStorage.getItem("userdata");
   const profileData = JSON.parse(userdata);
-  let { setUserToken } = useContext(UserContext);
+  let { setUserToken,setUserId} = useContext(UserContext);
   let navigate = useNavigate();
 
   function logOut() {
     localStorage.removeItem("userToken");
+    localStorage.removeItem("userId");
     setUserToken(null);
+    setUserId(null)
     navigate("/login");
   }
   return (
