@@ -6,7 +6,6 @@ import slider3 from "../../Assets/images/slider3.jpg";
 import three from "../../Assets/images/three.png";
 import {Helmet} from "react-helmet"; 
 import { Link } from "react-router-dom";
-import Style from "./Home.module.css";
 export default function Home() {
   const slides = [slider1, slider2, slider3];
   const categories = [
@@ -122,7 +121,7 @@ export default function Home() {
 
       <div className="flex flex-wrap flex-row row-span-2 justify-center">
         {categories.map((item, index) => (
-          <div className="card bg-base-100 scrollAnimated ml-6 mb-3 image-full w-96 shadow-xl">
+          <div key={index} className="card bg-base-100 scrollAnimated ml-6 mb-3 image-full w-96 shadow-xl">
             <figure>
               <img src={item.image} alt="Shoes" />
             </figure>

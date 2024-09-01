@@ -1,6 +1,7 @@
+
+
 .bg_img {
-    background: url(
-'https://media.geeksforgeeks.org/wp-content/uploads/20240226131034/2142357.jpg');
+    background: url('../../Assets/images/not-found.png') ;
     height: 400px;
     width: 100%;
     background-repeat: no-repeat;

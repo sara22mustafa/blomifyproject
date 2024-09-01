@@ -58,7 +58,7 @@ export default function ProductDetails() {
   const auth = getAuth();
   const user = auth.currentUser;
   const userId = user ? user.uid : null;
-
+  
   useEffect(() => {
     if (userId) {
       const saveCartToFirebase = async () => {
@@ -150,12 +150,11 @@ export default function ProductDetails() {
                   <li>Name :<b>{product.type}</b></li>
                   <li>Country :<b>{product.country}</b></li>
                   <li>Color :<b>{product.colour}</b></li>
-                  <li>id :<b>{product.id}</b></li>
                 </ul>
                 <h4 className="text-lg font-semibold text-yellow-600 mb-4">{product.price} EGP</h4>
                 <button
                   onClick={() => addCart(product)}
-                  className="bg-deep-burgundy text-white rounded-full py-2 px-4 mt-4 hover:bg-dusty-mauve transition"
+                  className="bg-deep-burgundy text-white rounded-tr-full rounded-bl-full py-2 px-8 mt-4 hover:bg-dusty-mauve transition"
                 >
                   Add to cart
                 </button>
