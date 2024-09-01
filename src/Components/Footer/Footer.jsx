@@ -1,23 +1,11 @@
-// import React from 'react'
-// export default function Footer() {
-//   return <>
-//     <footer className="bg-dark text-center text-white w-100 mt-auto" >
-//       <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-//         © 2020 Copyright:
-//         <a className="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-//       </div>
-//     </footer>
-//   </>
-// }
-
-//import React from "react";
-
 const Footer = () => {
   return (
     <>
+      <div className="flex flex-col justify-center">
+        <div className="flex-grow"></div>
 
         <footer className="bg-zinc-50 text-center text-surface bg-dusty-mauve mt-10 dark:text-white rounded-t-3xl">
-          <div className="container px-6 pt-6">
+          <div className="container mx-auto px-6 pt-6">
             {/* Social media icons container */}
             <div className="mb-6 flex justify-center space-x-2">
               <a
@@ -38,7 +26,6 @@ const Footer = () => {
                   </svg>
                 </span>
               </a>
-              
               
               <a
                 href="https://www.instagram.com/blo_omifyshop?igsh=anI3MW81cWpjNDd4"
@@ -63,13 +50,11 @@ const Footer = () => {
             {/* Copyright information */}
             <div className="mb-6">
               <p>
-              your local flower shop where every bouquet is crafted with love
-              and care to brighten your day and add a touch of nature's beauty
-              to your life
+                your local flower shop where every bouquet is crafted with love
+                and care to brighten your day and add a touch of nature's beauty
+                to your life
               </p>
             </div>
-            {/* Links section */}
-            
           </div>
           {/* Copyright section */}
           <div className="w-full bg-black/5 p-4 text-center">
@@ -79,6 +64,7 @@ const Footer = () => {
             </a>
           </div>
         </footer>
+      </div>
     </>
   );
 };
