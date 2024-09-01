@@ -15,11 +15,11 @@
 const Footer = () => {
   return (
     <>
-      <div className="min-h-screen flex flex-col">
+      <div className=" flex flex-col justify-center">
         <div className="flex-grow"></div>
 
         <footer className="bg-zinc-50 text-center text-surface bg-dusty-mauve mt-10 dark:text-white rounded-t-3xl">
-          <div className="container px-6 pt-6">
+          <div className="container mx-auto px-6 pt-6">
             {/* Social media icons container */}
             <div className="mb-6 flex justify-center space-x-2">
               <a
