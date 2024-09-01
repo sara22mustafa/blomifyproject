@@ -16,9 +16,9 @@ function Navbar() {
     setUserToken(null);
     navigate("./login");
   }
-  // useEffect(() => {
-  //   logOut();
-  // }, []);
+  useEffect(() => {
+    logOut();
+  }, []);
 
   const occasions = [
     "All bouquets",
