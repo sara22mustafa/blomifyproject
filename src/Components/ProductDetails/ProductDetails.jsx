@@ -58,7 +58,7 @@ export default function ProductDetails() {
   const auth = getAuth();
   const user = auth.currentUser;
   const userId = user ? user.uid : null;
-
+  
   useEffect(() => {
     if (userId) {
       const saveCartToFirebase = async () => {

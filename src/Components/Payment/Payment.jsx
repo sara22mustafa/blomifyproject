@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../../redux/cartSlice";
 
 const Payment = () => {
   const [cardNumber, setCardNumber] = useState("");
@@ -7,6 +9,8 @@ const Payment = () => {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [metthodtype, setmethodtype] = useState(false);
+  const dispatch = useDispatch();
+
   const handlePayment = (method) => {
     if (method === "cash") {
       setmethodtype(true);
@@ -15,6 +19,7 @@ const Payment = () => {
     setTimeout(() => {
       setIsLoading(false);
       setPaymentSuccess(true);
+      dispatch(clearCart());
     }, 2000);
   };
 
