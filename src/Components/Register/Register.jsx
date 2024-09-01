@@ -3,14 +3,17 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/firebase.js";
+import { auth, db } from "../../firebase/firebase.js";
 import registerImg from "../../Assets/images/register.png";
 import Loader from "../Loader/Loader.jsx";
 import FailTost from "../Toasters/FailTost.jsx";
 import { Helmet } from "react-helmet";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function Register() {
   let navigate = useNavigate();
+
+// registeration userData part -----------------------------------------------------------------------------------------------------------------------------
 
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -29,10 +32,16 @@ export default function Register() {
         values.email,
         values.password
       );
-      const user = userCredential.user;
-      console.log("User created:", user);
 
-      // Simulate storing token and redirecting (adjust to your use case)
+      // add register user data in firebase collection users
+      await setDoc(doc(db, "users", userCredential.user.uid), {
+        name: values.name,
+        phone: values.phone,
+        email: values.email,
+        password: values.password,
+      });
+
+      const user = userCredential.user;
       localStorage.setItem("userToken", user.accessToken); // Or any token mechanism you use
       navigate("/login");
     } catch (error) {
@@ -45,8 +54,12 @@ export default function Register() {
     localStorage.setItem("userdata", JSON.stringify(values));
   }
 
-  let phoneRegExp = /^(010|011|012|015)\d{8}$/;
+// End of registeration userData part -----------------------------------------------------------------------------------------------------------------------------
 
+
+// using yup & formik part to validate login data and forms ----------------------------------------------------------------------------------------------------------------------
+
+  let phoneRegExp = /^(010|011|012|015)\d{8}$/;
   let validationSchema = Yup.object({
     name: Yup.string()
       .min(3, "Name minLength is 3")
@@ -76,6 +89,8 @@ export default function Register() {
     validationSchema,
     onSubmit: registerSubmit,
   });
+
+// End part of formik and yup--------------------------------------------------------------------------------------------------------------------------------------
 
   return (
     <>
