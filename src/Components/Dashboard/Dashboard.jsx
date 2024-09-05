@@ -14,7 +14,7 @@ function Dashboard() {
   return (
     <div >
       <iframe 
-        src="http://localhost:3002/admin/default" 
+        src="http://localhost:3000/admin/default" 
         width="100%" 
         height="700px" 
         style={{ border: 'none' }} 
