@@ -19,6 +19,7 @@ function Dashboard() {
         height="700px" 
         style={{ border: 'none' }} 
         title="Dashboard"
+        
       />
     </div>
   );
